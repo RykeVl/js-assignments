@@ -1,10 +1,11 @@
+'use strict';
 
-/** ******************************************************************************************
+/********************************************************************************************
  *                                                                                          *
  * Plese read the following tutorial before implementing tasks:                             *
  * https://developer.mozilla.org/en/docs/Web/JavaScript/Guide/Regular_Expressions           *
  *                                                                                          *
- ******************************************************************************************* */
+ ********************************************************************************************/
 
 
 /**
@@ -30,7 +31,7 @@
  * @return {RegExp}
  */
 function getRegexForGuid() {
-  return /^{([0-9A-Fa-f]{8})-([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})-([0-9A-Fa-f]{4})-([0-9A-Fa-f]{12})}$/i;
+	return /^{([0-9A-F]{8})-([0-9A-F]{4})-([0-9A-F]{4})-([0-9A-F]{4})-([0-9A-F]{12})}$/i;
 }
 
 
@@ -52,7 +53,7 @@ function getRegexForGuid() {
  *
  */
 function getRegexForPitSpot() {
-  return /^.*p.t\w*/;
+	return /^.*p.t\w*/;
 }
 
 
@@ -71,7 +72,7 @@ function getRegexForPitSpot() {
  * @return {RegExp}
  */
 function getRegexForIPv4() {
-  return /^[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]$/;
+	return /^[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]\.[0-2]?[0-9]?[0-9]$/;
 }
 
 
@@ -90,9 +91,8 @@ function getRegexForIPv4() {
  * @return {RegExp}
  */
 function getRegexForSSN() {
-  return /^(?!000)[0-9]{3}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
+	return /^(?!000)[0-9]{3}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
 }
-
 
 /**
  * Returns the password validator regex.
@@ -104,7 +104,7 @@ function getRegexForSSN() {
  *  - Valid passwords will only be alphanumeric characters.
  *
  * @param {number} minLength
- * @return {RegExp}
+ * @return {Regex}
  *
  * @example
  *   let validator = getPasswordValidator(6);
@@ -115,14 +115,14 @@ function getRegexForSSN() {
  *   'Pa55'.match(validator) => false
  */
 function getPasswordValidator(minLength) {
-  return RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?!.*?[_|\W])[A-z0-9].{" + minLength + ",}$", "g");
+	return new RegExp('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d]{' + minLength + ',}');
 }
 
 
 module.exports = {
-  getRegexForGuid,
-  getRegexForPitSpot,
-  getRegexForIPv4,
-  getRegexForSSN,
-  getPasswordValidator,
+	getRegexForGuid: getRegexForGuid,
+	getRegexForPitSpot: getRegexForPitSpot,
+	getRegexForIPv4: getRegexForIPv4,
+	getRegexForSSN: getRegexForSSN,
+	getPasswordValidator: getPasswordValidator
 };

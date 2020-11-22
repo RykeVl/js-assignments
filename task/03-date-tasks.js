@@ -1,11 +1,13 @@
+'use strict';
 
-/** ******************************************************************************************
+/********************************************************************************************
  *                                                                                          *
  * Plese read the following tutorial before implementing tasks:                             *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Numbers_and_dates#Date_object
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date    *
  *                                                                                          *
- ******************************************************************************************* */
+ ********************************************************************************************/
+
 
 /**
  * Parses a rfc2822 string date representation into date value
@@ -20,7 +22,7 @@
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
 function parseDataFromRfc2822(value) {
-  return Date.parse(value);
+	return Date.parse(value);
 }
 
 /**
@@ -35,8 +37,9 @@ function parseDataFromRfc2822(value) {
  *    '2016-01-19T08:07:37Z' => Date()
  */
 function parseDataFromIso8601(value) {
-  return Date.parse(value);
+	return Date.parse(value);
 }
+
 
 /**
  * Returns true if specified date is leap year and false otherwise
@@ -53,9 +56,10 @@ function parseDataFromIso8601(value) {
  *    Date(2015,1,1)    => false
  */
 function isLeapYear(date) {
-  const year = date.getFullYear();
-  return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
+	const year = date.getFullYear();
+	return ((year % 4 === 0) && (year % 100 !== 0)) || (year % 400 === 0);
 }
+
 
 /**
  * Returns the string represention of the timespan between two dates.
@@ -73,18 +77,19 @@ function isLeapYear(date) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
 function timeSpanToString(startDate, endDate) {
-  const rez = endDate - startDate;
-  const h = Math.trunc(rez / 3600000 % 100).toString().padStart(2, '0');
-  const m = Math.trunc(rez / 60000 % 60).toString().padStart(2, '0');
-  const s = Math.trunc(rez / 1000 % 60).toString().padStart(2, '0');
-  const ms = Math.trunc(rez % 1000).toString().padStart(3, '0');
-  return (`${h}:${m}:${s}.${ms}`);
+    const rez = endDate - startDate;
+    const h = Math.trunc(rez / 3600000 % 100).toString().padStart(2, '0');
+    const m = Math.trunc(rez / 60000 % 60).toString().padStart(2, '0');
+    const s = Math.trunc(rez / 1000 % 60).toString().padStart(2, '0');
+    const ms = Math.trunc(rez % 1000).toString().padStart(3, '0');
+    return (`${h}:${m}:${s}.${ms}`);
 }
+
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock for the specified Greenwich time.
  * If you have problem with solution please read: https://en.wikipedia.org/wiki/Clock_angle_problem
- *
+ * 
  * @param {date} date
  * @return {number}
  *
@@ -95,19 +100,20 @@ function timeSpanToString(startDate, endDate) {
  *    Date.UTC(2016,3,5,21, 0) => Math.PI/2
  */
 function angleBetweenClockHands(date) {
-  const hoursArrow = 0.5 * (60 * (date.getUTCHours() % 12) + date.getUTCMinutes());
-  const minutesArrow = 6 * date.getUTCMinutes();
-  let angle = Math.abs(hoursArrow - minutesArrow);
-  if (angle > 180) {
-    angle = 360 - angle;
-  }
-  return (angle * Math.PI / 180);
+    const hoursArrow = 0.5 * (60 * (date.getUTCHours() % 12) + date.getUTCMinutes());
+    const minutesArrow = 6 * date.getUTCMinutes();
+    let angle = Math.abs(hoursArrow - minutesArrow);
+    if (angle > 180) {
+        angle = 360 - angle;
+    }
+    return (angle * Math.PI / 180);
 }
 
+
 module.exports = {
-  parseDataFromRfc2822,
-  parseDataFromIso8601,
-  isLeapYear,
-  timeSpanToString,
-  angleBetweenClockHands,
+	parseDataFromRfc2822: parseDataFromRfc2822,
+	parseDataFromIso8601: parseDataFromIso8601,
+	isLeapYear: isLeapYear,
+	timeSpanToString: timeSpanToString,
+	angleBetweenClockHands: angleBetweenClockHands
 };
